@@ -1,6 +1,6 @@
 # webview_sdl_krkr
 ## Chinses
-把krkrsdl2（[https://github.com/uyjulian/krkrsdl2](https://github.com/uyjulian/krkrsdl2)）编译成webassembly嵌入到安卓webview中的工程，配合nanohttpd拉起http服务实现在安卓手机上的webview运行krkr的目的
+把krkrsdl2（[https://github.com/uyjulian/krkrsdl2](https://github.com/uyjulian/krkrsdl2)）编译成webassembly嵌入到安卓webview中的工程，配合nanohttpd（[https://github.com/NanoHttpd/nanohttpd](https://github.com/NanoHttpd/nanohttpd)）拉起http服务实现在安卓手机上的webview运行krkr的目的
 
 代码可直接clone下来用android studio编译运行，建议在真机上运行以获取到手机的真实分辨率和屏幕像素密度，在红米K30下运行结果如下：
 
