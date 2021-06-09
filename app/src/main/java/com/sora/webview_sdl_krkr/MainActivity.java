@@ -4,15 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private WebView mWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         js_unit js_tool = new js_unit(this);
-        WebView webView = findViewById(R.id.web_view);
-        webView.addJavascriptInterface(js_tool,"js_tool");//注入一个工具类，获取屏幕宽高
-        WebSettings webSettings = webView.getSettings();
+        mWebView = (WebView) findViewById(R.id.web_view);
+        mWebView.addJavascriptInterface(js_tool,"js_tool");//注入一个工具类，获取屏幕宽高
+        WebSettings webSettings = mWebView.getSettings();
         // 允许执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
         // 浏览器不支持多窗口显示
@@ -45,22 +46,23 @@ public class MainActivity extends AppCompatActivity {
         WebViewClient cWebViewClient = new WebViewClient();
         WebChromeClient cWebChromeClient = new WebChromeClient();
         // 使用WebViewClient的特性处理html页面
-        webView.setWebViewClient(cWebViewClient);
+        mWebView.setWebViewClient(cWebViewClient);
         // 使用WebChromeClient的特性处理html页面
-        webView.setWebChromeClient(cWebChromeClient);
+        mWebView.setWebChromeClient(cWebChromeClient);
         //webView.setPictureListener(cWebViewClient);
-        webView.setBackgroundColor(1);
+        mWebView.setBackgroundColor(1);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         // 干掉滚动条
-        webView.setScrollContainer(false);
-        webView.setVerticalScrollBarEnabled(false);
-        webView.setHorizontalScrollBarEnabled(false);
+        mWebView.setScrollContainer(false);
+        mWebView.setVerticalScrollBarEnabled(false);
+        mWebView.setHorizontalScrollBarEnabled(false);
 
+        //String game_url = "http://soft.imtt.qq.com/browser/tes/feedback.html";
         String game_url = getString(R.string.load_game_host) + ":" + getString(R.string.load_game_port) + getString(R.string.html_path);
 
-        webView.loadUrl(game_url);
+        mWebView.loadUrl(game_url);
     }
 }

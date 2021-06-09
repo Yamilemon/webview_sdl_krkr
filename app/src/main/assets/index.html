@@ -12,13 +12,14 @@
         margin-top: 0;
         margin-left: 0;
         overflow: hidden;
+        background-color: black;
       }
 
-      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block;}
       div.emscripten { text-align: center; }      
       div.emscripten_border { border: 1px solid black; }
       /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-      canvas.emscripten { border: 0px none; background-color: black; position:absolute; width: 1280px; height: 720px;}
+      canvas.emscripten { border: 0px none; background-color: black; position:absolute; width: 1280px; height: 720px; left: "0px"; top: "0px"}
 
       #emscripten_logo {
         display: inline-block;
@@ -107,22 +108,10 @@
     <!--<meta name="page-view-size" content="1280*720">-->
   </head>
   <body>
-    
 
-    <!--<div class="spinner" id='spinner'></div>
-    <div class="emscripten" id="status">Downloading...</div>
-
-    <div class="emscripten">
-      <progress value="0" max="100" id="progress" hidden=1></progress>
-    </div>-->
-
-    
-    <!--<div class="emscripten_border">-->
-      <div style="width: 1280px; height: 720px; margin:0 auto">
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
-      </div>
-    <!--</div>-->
-    
+  <!--<div style="position: absolute; left:0; top:0">-->
+    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+  <!--</div>-->
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
@@ -145,17 +134,10 @@
         console.error("初始化像素分辨率失败！！" + e);
         fuckview.setAttribute('content','width=device-width, initial-scale=1.0');
       }
-      
-      //console.log("宽高：" + window.js_tool.getScreenWidth());
-      //console.log("devicePixelRatio" +window.devicePixelRatio);
-      /*window.onload = function(){
-        var hw = window.js_tool.getScreenWidth().split("*");
-        //console.log("宽高：" + window.js_tool.getScreenWidth());
-        document.getElementById("canvas").style.width = hw[0] + "px";
-        document.getElementById("canvas").style.height = hw[1] + "px";
-      }*/
+
+
       var Module = {
-        arguments: ['/data/data.xp3'],
+        arguments: ['/data.xp3'],
         preRun: [],
         postRun: [],
         print: (function() {
@@ -417,7 +399,7 @@ function intArrayToString(array) {
               }
 
               var xhr = new XMLHttpRequest();
-              xhr.open('GET', url, true);
+              xhr.open('GET', url + ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime(), true);
               xhr.responseType = 'arraybuffer';
               xhr.onprogress = function(event) {
                   var size = -1;
@@ -456,7 +438,7 @@ function intArrayToString(array) {
               }
               xhr.onload = function(event) {
                   if (xhr.status == 200 || xhr.status == 304 || xhr.status == 206 || (xhr.status == 0 && xhr.response)) {
-                      FS.writeFile('/data/data.xp3', new Uint8Array(xhr.response), {
+                      FS.writeFile('data.xp3', new Uint8Array(xhr.response), {
                           canOwn: true
                       });
                       if (Module['setStatus']) Module['setStatus']('');
@@ -469,11 +451,10 @@ function intArrayToString(array) {
                       if (Module['setStatus']) Module['setStatus']('Project download error!');
                   }
               };
-              FS.mkdir('/data');
-              FS.chdir('/data');
               xhr.send(null);
-              FS.mkdir('/savedata');
-              FS.mount(IDBFS, {}, '/savedata');
+              FS.mkdir('/libsdl');
+              FS.mkdir('/libsdl/krkrsdl2');
+              FS.mount(IDBFS, {}, '/libsdl/krkrsdl2');
 
               FS.syncfs(true, function (err) {
                 Module['removeRunDependency']('savedata');

@@ -1,0 +1,17 @@
+{
+	"components": [{
+			"name": "shell",
+			"entry": "tbs_jars_fusion_dex.jar:com.tencent.tbs.core.X5CoreEntry",
+			"files": [{
+				"src": "tbs_jars_fusion_dex.jar"
+			}]
+		},
+		{
+			"name": "extension",
+			"entry": "tbs_sdk_extension_dex.jar:com.tencent.tbs.sdk.extension.TbsSDKExtension",
+			"files": [{
+				"src": "tbs_sdk_extension_dex.jar"
+			}]
+		}
+	]
+}
