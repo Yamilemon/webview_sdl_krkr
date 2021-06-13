@@ -1,5 +1,5 @@
 # webview_sdl_krkr
-将[sdl2版的krkr](https://www.libsdl.org/)搭载进安卓webview中的程序，可以在安卓手机上打包运行xp3包。目前使用了腾讯的X5内核作为浏览器内核，[nanoHttpd](https://github.com/NanoHttpd/nanohttpd)作为本地服务器框架，通过在手机内运行服务器并用webview进行访问来达到在浏览器上运行webassembly的目的。
+将[sdl2版的krkr](https://github.com/krkrsdl2/krkrsdl2)搭载进安卓webview中的程序，可以在安卓手机上打包运行xp3包。目前使用了腾讯的X5内核作为浏览器内核，[nanoHttpd](https://github.com/NanoHttpd/nanohttpd)作为本地服务器框架，通过在手机内运行服务器并用webview进行访问来达到在浏览器上运行webassembly的目的。
 
 
 ## 使用方式
