@@ -11,7 +11,11 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        QbSdk.preinstallStaticTbs(getApplicationContext());
+        try{
+            // QbSdk.preinstallStaticTbs(getApplicationContext());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         //fileDelete.DeleteFile(getExternalFilesDir("/VideoCache"));
        /* HashMap map = new HashMap();
         map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);

@@ -2,5 +2,5 @@
     <string name="app_name">webview_sdl_krkr</string>
     <string name="load_game_host">http://localhost</string>
     <string name="load_game_port">7001</string>
-    <string name="html_path">/public/index.html</string>
+    <string name="html_path">/index.html</string>
 </resources>

@@ -20,6 +20,7 @@
       div.emscripten_border { border: 1px solid black; }
       /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
       canvas.emscripten { border: 0px none; background-color: black; position:absolute; width: 1280px; height: 720px; left: "0px"; top: "0px"}
+      video.emscripten { border: 0px none; background-color: black; position:absolute; width: 1280px; height: 720px; left: "0px"; top: "0px"}
 
       #emscripten_logo {
         display: inline-block;
@@ -105,14 +106,15 @@
       }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" id="matherfuckview"/>
-    <!--<meta name="page-view-size" content="1280*720">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
   </head>
   <body>
 
-  <!--<div style="position: absolute; left:0; top:0">-->
-    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
-  <!--</div>-->
-
+    <!--<div style="position: absolute; left:0; top:0">-->
+      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+    <!--</div>-->
+    <script type="text/javascript" src="/audioutil.js"></script>
+    <script type="text/javascript" src="/videoutil.js"></script>
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
       var progressElement = document.getElementById('progress');
@@ -134,7 +136,6 @@
         console.error("初始化像素分辨率失败！！" + e);
         fuckview.setAttribute('content','width=device-width, initial-scale=1.0');
       }
-
 
       var Module = {
         arguments: ['/data.xp3'],
@@ -181,17 +182,17 @@
           Module.setStatus.last.text = text;
           if (m) {
             text = m[1];
-            //progressElement.value = parseInt(m[2])*100;
-            //progressElement.max = parseInt(m[4])*100;
-            //progressElement.hidden = false;
-            //spinnerElement.hidden = false;
+            // progressElement.value = parseInt(m[2])*100;
+            // progressElement.max = parseInt(m[4])*100;
+            // progressElement.hidden = false;
+            // spinnerElement.hidden = false;
           } else {
-            //progressElement.value = null;
-            //progressElement.max = null;
-            //progressElement.hidden = true;
-            //if (!text) spinnerElement.style.display = 'none';
+            // progressElement.value = null;
+            // progressElement.max = null;
+            // progressElement.hidden = true;
+            // if (!text) spinnerElement.style.display = 'none';
           }
-          //statusElement.innerHTML = text;
+          // statusElement.innerHTML = text;
         },
         totalDependencies: 0,
         monitorRunDependencies: function(left) {
@@ -203,7 +204,7 @@
       window.onerror = function(event) {
         // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
         Module.setStatus('Exception thrown, see JavaScript console');
-        //spinnerElement.style.display = 'none';
+        // spinnerElement.style.display = 'none';
         Module.setStatus = function(text) {
           if (text) Module.printErr('[post-exception status] ' + text);
         };
@@ -481,5 +482,3 @@ function intArrayToString(array) {
 </script>
   </body>
 </html>
-
-
