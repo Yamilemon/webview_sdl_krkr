@@ -12,7 +12,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         try{
-            // QbSdk.preinstallStaticTbs(getApplicationContext());
+            QbSdk.preinstallStaticTbs(getApplicationContext());
         }catch(Exception e){
             e.printStackTrace();
         }
